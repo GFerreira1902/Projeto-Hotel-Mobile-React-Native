@@ -24,6 +24,8 @@ Plataforma(s) utilizadas:
 . Tempo de desenvolvimento:
 	- Em torno de 4/5 meses
 	
+PROTÓTIPO
+
 ![Captura de Tela (143)](https://user-images.githubusercontent.com/61297923/140062897-27d719b8-6d82-4a6c-aa01-4d83cd9d556a.png)
 
 
