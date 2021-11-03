@@ -7,9 +7,9 @@ PROJETO MOBILE PALACE HOTEL
 	além disso, possibilitar que este faça seu cadastro no sistema e fazer login no mesmo.
 
 . Integrantes:
-	- Guilherme Ferreira -> GFerreira1902
-	- Thiel Rodrigues -> Thiel-99
-	- Wallace de Oliveira -> Dev-Wallace
+	# Guilherme Ferreira - GFerreira1902
+	# Thiel Rodrigues - Thiel-99
+	# Wallace de Oliveira - Dev-Wallace
 
 . Linguagem base para Mobile:
 	- JavaScript
