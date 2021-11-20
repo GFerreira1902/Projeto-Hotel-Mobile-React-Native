@@ -1,33 +1,11 @@
-PROJETO MOBILE PALACE HOTEL
+# Sample Snack app
 
-. Breve explicação sobre o tema:
-	- Este trabalho tem como objetivo final apresentar um aplicativo básico de reserva em um hotel. Este deve seguir
-	o padrão de cores e elementos de acordo com o seu protótipo criado na plataforma do Figma. O projeto Palace Hotel
-	deve ser capaz de possibilitar aos seus usuários marcarem reservas em um hotel com diferentes opções de quarto, 
-	além disso, possibilitar que este faça seu cadastro no sistema e fazer login no mesmo.
+Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
 
-. Integrantes:
-	# Guilherme Ferreira - GFerreira1902
-	# Thiel Rodrigues - Thiel-99
-	# Wallace de Oliveira - Dev-Wallace
+When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo-cli](https://docs.expo.io/get-started/installation).
 
-. Linguagem base para Mobile:
-	- JavaScript
+All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
 
-. Tecnologias / Frameworks: 
-	- React Native
+If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.io/c/snack).
 
-Plataforma(s) utilizadas: 
-	- Figma (Prototipação)	
-	- Snack (Desenvolvimento)
-    
-. Tempo de desenvolvimento:
-	- Em torno de 4/5 meses
-	
-	
-	
-PROTÓTIPO
-
-![Captura de Tela (143)](https://user-images.githubusercontent.com/61297923/140062897-27d719b8-6d82-4a6c-aa01-4d83cd9d556a.png)
-
-
+Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
