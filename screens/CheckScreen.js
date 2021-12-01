@@ -42,7 +42,7 @@ export default function CheckScreen({navigation}) {
       <ScrollView>
 
         <View>
-          <Image style={styles.quarto} source={require('../assets/basic.png')} />
+          <Image style={styles.quarto} source={require('../assets/hotel.jpg')} />
         </View>
 
         <View style={{flexDirection:'row', alignSelf:'center',marginBottom:55}}>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     padding:15
   },
   quarto: {
-    width: 200,
+    width: 300,
     height: 200,
     alignSelf:'center',
     marginTop: '10%',

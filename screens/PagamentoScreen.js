@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { StyleSheet, TextInput, View,Image, Text,SafeAreaView } from 'react-native';
+import { StyleSheet, TextInput, View,Image, Text,SafeAreaView,Picker } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
@@ -10,7 +10,7 @@ export default function PagamentoScreen({ navigation}) {
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
   const [formapag, setFormaPag] = useState('');
-
+  const [selectedformapag, setSelectedformapag] = useState("");
 
   const botaoFinaliza = () => {
     navigation.push('confirmareserva');
@@ -75,6 +75,16 @@ export default function PagamentoScreen({ navigation}) {
           value={formapag}
           onChangeText={(text) => setFormaPag(text)}
         />
+
+        <Picker
+        selectedValue={selectedformapag}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => setSelectedformapag(itemValue)}>
+          <Picker.Item label="Dinheiro" value="Dinheiro" />
+          <Picker.Item label="Pix" value="Pix" />
+          <Picker.Item label="Cartão de Crédito" value="Cartão de Crédito" />
+          <Picker.Item label="Cartão de Débito" value="Cartão de Débito" />
+        </Picker>
       </View>
     
       <View style={styles.botao}>
