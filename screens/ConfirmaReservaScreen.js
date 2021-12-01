@@ -27,7 +27,7 @@ export default function ConfirmaReservaScreen({navigation}) {
         <View style={{backgroundColor:'black',height:'auto',width:'80%',alignSelf:'center',marginTop:'30%', padding: 40}}>
         
           <Text style={{width:'100%', color:'white',padding:0,textAlign:'center'}}>
-            SUA RESERVA FOI FEITA, PAGUE COM A FORMA SELECIONADA NO DIA DE CHECK-IN PRESENCIALMENTE, AGUARDAMOS VOCÊ!!
+            SUA RESERVA FOI FEITA, PAGUE COM A FORMA SELECIONADA DE FORMA PRESENCIAL NO DIA DE CHECK-IN, AGUARDAMOS VOCÊ!!
           </Text>
 
         </View>

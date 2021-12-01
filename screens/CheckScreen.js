@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, Image } from 'react-native';
 import {Button } from 'react-native-elements';
+import { UserContext } from '../context/UserContext';
 
 export default function CheckScreen({navigation}) {
 
   const [checkin, setCheckin] = useState('');
   const [checkout, setCheckout] = useState('');
   const [obs, setObs] = useState('');
+  const [usuario, setUsuario] = useContext(UserContext);
 
   const botaoLogout = () =>{
-    navigation.push('login')
+    setUsuario({ logado: false, nome: '' });
   };
 
   const botaoVoltar = () =>{
@@ -42,7 +44,7 @@ export default function CheckScreen({navigation}) {
       <ScrollView>
 
         <View>
-          <Image style={styles.quarto} source={require('../assets/basic.png')} />
+          <Image style={styles.quarto} source={require('../assets/hotel.jpg')} />
         </View>
 
         <View style={{flexDirection:'row', alignSelf:'center',marginBottom:55}}>
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
     padding:15
   },
   quarto: {
-    width: 200,
+    width: 300,
     height: 200,
     alignSelf:'center',
     marginTop: '10%',

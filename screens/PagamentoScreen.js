@@ -1,6 +1,7 @@
-import React, { useState} from 'react';
-import { StyleSheet, TextInput, View,Image, Text,SafeAreaView } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet, TextInput, View,Image, Text,SafeAreaView,Picker } from 'react-native';
 import { Button } from 'react-native-elements';
+import { UserContext } from '../context/UserContext';
 
 
 
@@ -10,14 +11,15 @@ export default function PagamentoScreen({ navigation}) {
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
   const [formapag, setFormaPag] = useState('');
-
+  const [selectedformapag, setSelectedformapag] = useState("");
+  const [usuario, setUsuario] = useContext(UserContext);
 
   const botaoFinaliza = () => {
     navigation.push('confirmareserva');
   };
 
   const botaoLogout = () =>{
-    navigation.push('login')
+    setUsuario({ logado: false, nome: '' });
   };
 
   const botaoVoltar = () =>{
@@ -33,7 +35,7 @@ export default function PagamentoScreen({ navigation}) {
       <View style={styles.containerhead}>
 
         <View style={{alignSelf:'center'}}>
-          <Button  buttonStyle={{backgroundColor: 'black'}} title='<--' color='black'  onPress={botaoVoltar}/>
+          <Button  buttonStyle={{backgroundColor: 'black'}} title='<--' color='black'  onPress={botaoVoltar}/> 
         </View>  
 
         <View>
@@ -75,6 +77,16 @@ export default function PagamentoScreen({ navigation}) {
           value={formapag}
           onChangeText={(text) => setFormaPag(text)}
         />
+
+        <Picker
+        selectedValue={selectedformapag}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => setSelectedformapag(itemValue)}>
+          <Picker.Item label="Dinheiro" value="Dinheiro" />
+          <Picker.Item label="Pix" value="Pix" />
+          <Picker.Item label="Cartão de Crédito" value="Cartão de Crédito" />
+          <Picker.Item label="Cartão de Débito" value="Cartão de Débito" />
+        </Picker>
       </View>
     
       <View style={styles.botao}>

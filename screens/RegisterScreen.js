@@ -1,7 +1,10 @@
 import {StatusBar} from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {  StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
+import DatePicker from 'react-native-datepicker';
+import firebase from 'firebase';
+import { UserContext } from '../context/UserContext.js'
 
 export default function RegisterScreen({ navigation }) {
   const [nome, setNome] = useState('');
@@ -10,9 +13,17 @@ export default function RegisterScreen({ navigation }) {
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [usuario, setUsuario] = useContext(UserContext);
 
-  const botaoLoginScreen = () => {
-    navigation.push('login');
+  const botaoRegistraScreen = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, senha)
+      .then((userCredential) => {
+        setUsuario({ logado: true, nome: nome });
+        return userCredential.user.updateProfile({ displayName: nome });
+      })
+      .catch((error) => alert(error.message));
   };
 
   const botaoVoltar = () =>{
@@ -52,7 +63,7 @@ export default function RegisterScreen({ navigation }) {
           onChangeText={(text) => setCpf(text)}
         />
 
-        <Datepicker
+        <TextInput
           placeholder="DATA DE NASCIMENTO"
           style={styles.textInput}
           autoCapitalize={false}
@@ -91,7 +102,7 @@ export default function RegisterScreen({ navigation }) {
         />
 
         <View style={styles.button}>
-          <Button buttonStyle={{backgroundColor: 'black', width:200,}} title="CADASTRAR" color="black" onPress={botaoLoginScreen} />
+          <Button buttonStyle={{backgroundColor: 'black', width:200,}} title="CADASTRAR" color="black" onPress={botaoRegistraScreen} />
         </View>
 
         <View style={styles.button2}>
