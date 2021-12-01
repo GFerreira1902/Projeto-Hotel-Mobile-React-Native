@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {  StyleSheet,Text, View, TextInput, SafeAreaView, ScrollView, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker'
+import firebase from 'firebase';
+
+import { UserContext } from '../context/UserContext';
 
 export default function InicialScreen({ navigation }) {
 
   const [checkin, setCheckin] = useState('');
   const [checkout, setCheckout] = useState('');
+  const [usuario, setUsuario] = useContext(UserContext);
 
   const botaoLogout = () =>{
-    navigation.push('login')
+    setUsuario({ logado: false, nome: '' });
   };
 
   const botaoModal = () =>{
     navigation.push('check')
   };
 
-  const botaoFilter = () =>{
-    navigation.push('check')
-  };
 
   return (
 
@@ -27,7 +28,7 @@ export default function InicialScreen({ navigation }) {
       
           <Text style={styles.header}>PALACE HOTEL</Text>           
         
-          <Button buttonStyle={{backgroundColor: 'black', padding:15}} title='SAIR' color='black'  onPress={botaoLogout}/>
+          <Button buttonStyle={{backgroundColor: 'black', padding:15}} title='SAIR' color='black'  onPress={botaoLogout}/> 
       </View>
 
       

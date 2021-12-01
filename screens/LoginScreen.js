@@ -1,23 +1,35 @@
 import { StatusBar} from 'expo-status-bar'
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, View, StyleSheet, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import {Button} from 'react-native-elements';
+import { UserContext } from '../context/UserContext';
+import { useForm, Controller } from 'react-hook-form';
+import firebase from 'firebase';
 
-
-
-
-
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({navigation, logado}) {
 
   const [ email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
+  const [usuario, setUsuario] = useContext(UserContext)
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const botaoInicial = () =>{
-    navigation.push('home');
+  const botaoInicial = (values) =>{
+    const { email, senha } = values;
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, senha)
+      .then((userCredential) => {
+        setUsuario({ nome: userCredential.user.displayName, logado: true });
+      })
+      .catch((error) => alert(error.message));
   };
 
   const botaoCadastro = () =>{
-    navigation.push('cadastro')
+    navigation.push('cadastro') 
   };
 
   return (
@@ -29,24 +41,49 @@ export default function LoginScreen({navigation}) {
       <ScrollView style= {styles.containerscrool}>
         <StatusBar hidden />
 
-        <TextInput placeholder='EMAIL' 
-          style={styles.textInput} 
-          autoCapitalize={false}
-            keyboardType="email-address"
-          placeholderTextColor = 'black'
-          onChangeText={text => setEmail(text)}
+        <Controller
+          control={control}
+          name="email"
+          rules={{
+            required: { value: true, message: 'Email obrigatório' },
+          }}
+          render={({ field: { value, onChange } }) => (
+            <TextInput placeholder='EMAIL' 
+              style={styles.textInput} 
+              autoCapitalize={false}
+              keyboardType="email-address"
+              placeholderTextColor = 'black'
+              onChangeText={text => setEmail(text)}
+            />
+          )}
         />
+        {errors?.email && (
+          <Text style={{ color: 'white', textAlign:'center' }}>{errors?.email?.message}</Text>
+        )}
 
-        <TextInput placeholder='SENHA' 
-          style={styles.textInput} 
-          autoCapitalize={false}
-          secureTextEntry={true}
-          placeholderTextColor = 'black'
-          onChangeText={text => setSenha(text)}
+        <Controller
+          control={control}
+          name="senha"
+          rules={{
+            required: { value: true, message: 'Senha obrigatória' },
+          }}
+          render={({ field: { value, onChange } }) => (
+            <TextInput placeholder='SENHA' 
+              style={styles.textInput} 
+              autoCapitalize={false}
+              secureTextEntry={true}
+              placeholderTextColor = 'black'
+              onChangeText={text => setSenha(text)}
+            />
+          )}
         />
+        {errors?.senha && (
+          <Text style={{ color: 'white', textAlign:'center' }}>{errors?.senha?.message}</Text>
+        )}
+
 
         <View style={styles.button}>
-          <Button buttonStyle={{backgroundColor: 'black', width:200,}}  title="ENTRAR"  color = 'black'  onPress = {botaoInicial} />
+          <Button buttonStyle={{backgroundColor: 'black', width:200,}}  title="ENTRAR"  color = 'black'  onPress = {handleSubmit(botaoInicial)} />
         </View>
 
         <View style={styles.button2}>
