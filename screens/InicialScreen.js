@@ -13,16 +13,13 @@ export default function InicialScreen({ navigation }) {
   const [usuario, setUsuario] = useContext(UserContext);
 
   const botaoLogout = () =>{
-    navigation.push('login')
+    setUsuario({ logado: false, nome: '' });
   };
 
   const botaoModal = () =>{
     navigation.push('check')
   };
 
-  const botaoFilter = () =>{
-    navigation.push('check')
-  };
 
   return (
 
@@ -31,7 +28,7 @@ export default function InicialScreen({ navigation }) {
       
           <Text style={styles.header}>PALACE HOTEL</Text>           
         
-          <Button buttonStyle={{backgroundColor: 'black', padding:15}} title='SAIR' color='black'  onPress={botaoLogout}/>
+          <Button buttonStyle={{backgroundColor: 'black', padding:15}} title='SAIR' color='black'  onPress={botaoLogout}/> 
       </View>
 
       

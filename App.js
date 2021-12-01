@@ -35,7 +35,7 @@ if (firebase.apps.length == 0) {
 const Stack = createNativeStackNavigator();
 
 export default function App({ navigation }) {
-  const [exibeSplash, setExibeSplash] = useState(true);
+  const [exibeSplash, setExibeSplash] = useState(true);    
  
   useEffect(() => {
     setTimeout(() => {

@@ -30,7 +30,7 @@ export default function MainNavigator() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="registrar"
+            name="cadastro"
             component={RegisterScreen}
             options={{ headerShown: false }}
           />

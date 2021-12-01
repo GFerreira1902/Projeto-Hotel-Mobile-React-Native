@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, Image } from 'react-native';
 import {Button } from 'react-native-elements';
+import { UserContext } from '../context/UserContext';
 
 export default function CheckScreen({navigation}) {
 
   const [checkin, setCheckin] = useState('');
   const [checkout, setCheckout] = useState('');
   const [obs, setObs] = useState('');
+  const [usuario, setUsuario] = useContext(UserContext);
 
   const botaoLogout = () =>{
-    navigation.push('login')
+    setUsuario({ logado: false, nome: '' });
   };
 
   const botaoVoltar = () =>{
