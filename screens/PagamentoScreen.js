@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, TextInput, View,Image, Text,SafeAreaView,Picker } from 'react-native';
 import { Button } from 'react-native-elements';
 import { UserContext } from '../context/UserContext';
+import firebase from 'firebase';
 
 
 
@@ -10,11 +11,16 @@ export default function PagamentoScreen({ navigation}) {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
-  const [formapag, setFormaPag] = useState('');
   const [selectedformapag, setSelectedformapag] = useState("");
   const [usuario, setUsuario] = useContext(UserContext);
 
   const botaoFinaliza = () => {
+    firebase.firestore().collection('minhasreservas').add({
+      nome: nome,
+      sobrenome: sobrenome,
+      email: email,
+      selectedformapag: selectedformapag,
+    });
     navigation.push('confirmareserva');
   };
 
@@ -70,14 +76,7 @@ export default function PagamentoScreen({ navigation}) {
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
-        <TextInput
-          style={styles.campo}
-          autoCapitalize={false}
-          placeholder="FORMA DE PAGAMENTO"
-          value={formapag}
-          onChangeText={(text) => setFormaPag(text)}
-        />
-
+    
         <Picker
         selectedValue={selectedformapag}
         style={{ height: 50, width: 150 }}
