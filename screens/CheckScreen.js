@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, Image } from 'react-native';
 import {Button } from 'react-native-elements';
+import { UserContext } from '../context/UserContext';
+import firebase from 'firebase';
 
 export default function CheckScreen({navigation}) {
 
-  const [checkin, setCheckin] = useState('');
-  const [checkout, setCheckout] = useState('');
+  
   const [obs, setObs] = useState('');
+  const [usuario, setUsuario] = useContext(UserContext);
 
   const botaoLogout = () =>{
-    navigation.push('login')
+    setUsuario({ logado: false, nome: '' });
   };
 
   const botaoVoltar = () =>{
-    navigation.push('home')
+    navigation.push('#')
   };
 
-  const botaoPagar = () =>{
-    navigation.push('pagamento')
+  const botaoEnvioDetalhe = () =>{
+    navigation.push('confirmareserva')
   };
 
   return (
@@ -25,9 +27,7 @@ export default function CheckScreen({navigation}) {
     <SafeAreaView> 
       <View style={styles.containerhead}>
 
-        <View style={{alignSelf:'center'}}>
-          <Button buttonStyle={{backgroundColor:'black', color:'#E8AF20'}} title='<--'   onPress={botaoVoltar}/>
-        </View>  
+          
 
         <View>
           <Text style={styles.headertexts}>PALACE HOTEL</Text>
@@ -35,30 +35,14 @@ export default function CheckScreen({navigation}) {
         
 
         <View style={{alignSelf:'center'}}>
-          <Button buttonStyle={{backgroundColor:'black' }} title='SAIR' color='black'  onPress={botaoLogout}/>
+          <Button buttonStyle={{backgroundColor:'black' }} title='SAIR' color='black'  onPress={botaoLogout}/> 
         </View>  
       </View>
 
       <ScrollView>
 
         <View>
-          <Image style={styles.quarto} source={require('../assets/basic.png')} />
-        </View>
-
-        <View style={{flexDirection:'row', alignSelf:'center',marginBottom:55}}>
-          <TextInput placeholder='CHECK - IN' 
-          style={styles.check} 
-          autoCapitalize={false}
-          placeholderTextColor = 'black'
-          onChangeText={text => setCheckin(text)}
-        />
-
-        <TextInput placeholder='CHECK-OUT' 
-          style={styles.check} 
-          autoCapitalize={false}
-          placeholderTextColor = 'black'
-          onChangeText={text => setCheckout(text)} 
-        />
+          <Image style={styles.quarto} source={require('../assets/hotel.jpg')} />
         </View>
 
         <View style={{backgroundColor:'black',
@@ -81,7 +65,7 @@ export default function CheckScreen({navigation}) {
         </View>
 
         <View style={{alignSelf:'center', }}>  
-          <Button buttonStyle={{backgroundColor: 'black', width:200, alignISelf:'center'}} title="PAGAMENTO" color="black" onPress={botaoPagar} />
+          <Button buttonStyle={{backgroundColor: 'black', width:200, alignISelf:'center'}} title="ENVIAR DETALHES" color="black" onPress={botaoEnvioDetalhe} />
         </View>      
       </ScrollView>
 
@@ -114,7 +98,7 @@ const styles = StyleSheet.create({
     padding:15
   },
   quarto: {
-    width: 200,
+    width: 300,
     height: 200,
     alignSelf:'center',
     marginTop: '10%',

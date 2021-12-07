@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {  StyleSheet,Text, View, TextInput, SafeAreaView, ScrollView, Image } from 'react-native';
 import { Button } from 'react-native-elements';
-import DatePicker from 'react-native-datepicker'
+import DatePicker from 'react-native-datepicker';
+import firebase from 'firebase';
+
+import { UserContext } from '../context/UserContext';
 
 export default function InicialScreen({ navigation }) {
 
   const [checkin, setCheckin] = useState('');
   const [checkout, setCheckout] = useState('');
+  const [usuario, setUsuario] = useContext(UserContext);
 
   const botaoLogout = () =>{
-    navigation.push('login')
+    setUsuario({ logado: false, nome: '' });
   };
 
-  const botaoModal = () =>{
-    navigation.push('check')
+  const botaoPagamento = () =>{
+    navigation.push('pagamento')
   };
 
-  const botaoFilter = () =>{
-    navigation.push('check')
+  const botaoReservas = () =>{
+    navigation.push('reservas')
   };
+
 
   return (
 
@@ -27,23 +32,35 @@ export default function InicialScreen({ navigation }) {
       
           <Text style={styles.header}>PALACE HOTEL</Text>           
         
-          <Button buttonStyle={{backgroundColor: 'black', padding:15}} title='SAIR' color='black'  onPress={botaoLogout}/>
+          <Button buttonStyle={{backgroundColor: 'black', padding:15}} title='SAIR' color='black'  onPress={botaoLogout}/> 
       </View>
 
       
 
       <ScrollView style={{marginBottom: '30%'}}>        
-          
+        <View>
+          <Button buttonStyle={{backgroundColor: 'black',  width:'40%' , marginTop: '2%', alignSelf:'center'}} title='Minhas Reservas'  onPress={botaoReservas}/> 
+        </View>  
         <View style={styles.caixascrool}>
 
           <View style={{}}>
 
-            <Text style={{fontSize:20, fontWeight: 'bold', paddingBottom: 25, marginTop: 15}}>Quarto Básico</Text>
-            <Button buttonStyle={{backgroundColor: 'black',  width:'40%' ,marginHorizontal:0}} title='ESCOLHER QUARTO'  onPress={botaoModal}/>     
+            <Text style={{fontSize:20, fontWeight: 'bold', paddingBottom: 25, marginTop: 15,  }}>Quarto Básico</Text>
+            <Button buttonStyle={{backgroundColor: 'black',  width:'40%' ,marginHorizontal:0, marginTop: 45}} title='ESCOLHER QUARTO'  onPress={botaoPagamento}/>      
             
           </View>
-          <Image style={styles.quarto} source={require('../assets/basic.png')} />  
+          <Image style={styles.quarto} source={require('../assets/basic.png')} />
 
+          <View style={{marginTop: '2%'}}>
+           
+            <Text style={styles.textinfo}>. Ar-Condicionado</Text> 
+            <Text style={styles.textinfo}>. Varanda com vista para parque ecológico</Text> 
+            <Text style={styles.textinfo}>. Cama para Casal</Text>
+            <Text style={styles.textinfo}>. Tv a Cabo</Text>
+            <Text style={styles.textinfo}>. Tecidos de Cama Premium</Text>
+            
+            <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: '2%'}}>Valor: 310,79</Text>
+          </View>
         </View>
        
 
@@ -53,10 +70,22 @@ export default function InicialScreen({ navigation }) {
           <View style={{}}>
 
             <Text style={{fontSize:20, fontWeight: 'bold', paddingBottom: 25, marginTop: 15}}>Quarto Premium</Text>
-            <Button buttonStyle={{backgroundColor: 'black',  width:'40%' ,marginHorizontal:0}} title='ESCOLHER QUARTO'  onPress={botaoModal}/>     
+            <Button buttonStyle={{backgroundColor: 'black',  width:'40%' ,marginHorizontal:0 , marginTop: 45}} title='ESCOLHER QUARTO'  onPress={botaoPagamento}/>      
             
           </View>
-          <Image style={styles.quarto} source={require('../assets/premium.png')} /> 
+          <Image style={styles.quarto} source={require('../assets/premium.png')} />
+
+          <View style={{marginTop: '2%'}}>
+           
+            <Text style={styles.textinfo}>. Ar-Condicionado</Text> 
+            <Text style={styles.textinfo}>. Varanda Privilegiada</Text> 
+            <Text style={styles.textinfo}>. Cama para Casal</Text>
+            <Text style={styles.textinfo}>. Tv a Cabo</Text>
+            <Text style={styles.textinfo}>. Tecidos de Cama de Primeira</Text>
+            <Text style={styles.textinfo}>. Quarto com detalhes em madeira</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: '2%'}}>Valor: 350,00</Text> 
+
+          </View>
         </View>
 
         <View style={styles.caixascrool}> 
@@ -65,11 +94,23 @@ export default function InicialScreen({ navigation }) {
           <View style={{}}>
 
             <Text style={{fontSize:20, fontWeight: 'bold', paddingBottom: 25, marginTop: 15}}>Quarto Deluxe</Text>
-            <Button buttonStyle={{backgroundColor: 'black',  width:'40%' ,marginHorizontal:0}} title='ESCOLHER QUARTO'  onPress={botaoModal}/>     
+            <Button buttonStyle={{backgroundColor: 'black',  width:'40%' ,marginHorizontal:0 , marginTop: 45}} title='ESCOLHER QUARTO'  onPress={botaoPagamento}/>     
             
           </View>
           <Image style={styles.quarto} source={require('../assets/deluxe.png')} />  
           
+          <View style={{marginTop: '2%'}}>
+           
+            <Text style={styles.textinfo}>. Ar-Condicionado</Text> 
+            <Text style={styles.textinfo}>. Varanda enorme com vista para o mar</Text>   
+            <Text style={styles.textinfo}>. Cama para Casal</Text>
+            <Text style={styles.textinfo}>. Tv a Cabo</Text>
+            <Text style={styles.textinfo}>. Tecidos de Cama de Primeira</Text>
+            <Text style={styles.textinfo}>. Quarto com detalhes em madeira</Text>
+            <Text style={styles.textinfo}>. Direito a Jantar romântico</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: '2%'}}>Valor: 430,29</Text>
+
+          </View>
         </View>
         
         
@@ -103,6 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#E8AF20',
     marginHorizontal: 10,
+    fontWeight: 'bold'
   },
   check:{
     borderBottomColor: '#131212',
@@ -120,17 +162,22 @@ const styles = StyleSheet.create({
     fontSize: 30,
     backgroundColor: '#E8AF20',
     borderWidth: 5,
-    border:'solid black 6px',
-    height: 180,
-    width:'90%',
+    border:'solid black 6px', 
+    height: 415,  
+    width:'90%' 
     
   },
 
   quarto: {
     width: '45%',
-    height:'100%',
+    height:'43%',
     alignSelf:'flex-end',
-    marginTop: -125
+    marginTop: -170,
+  },
+
+  textinfo: {
+    fontWeight: 'bold',
+    marginTop: "2%"
   },
   
 })
