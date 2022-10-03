@@ -9,3 +9,13 @@ All projects created in Snack are publicly available, so you can easily share th
 If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.io/c/snack).
 
 Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+
+
+Projeto baseado em React Native, onde neste app mobile foi usado o firebase para construção do backend. A ideia do app é a possibilidade do usuário de conseguir agendar reservas, editar e cancelar as mesmas em alguns hotéis disponibilizados previamente no app além de validações de cadastro no site.
+
+Abaixo segue o protótipo do mesmo no figma, deixando claro que o projeto final ficou exatamente como o mostrado abaixo.
+
+
+
+
+![ProjetoHotelMobile1](https://user-images.githubusercontent.com/61297923/193606066-88c53d76-ae65-4494-8fa9-dc9df6dac680.jpeg)
